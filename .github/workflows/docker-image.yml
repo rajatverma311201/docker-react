@@ -1,18 +1,17 @@
 name: Docker Image CI
 
 on:
-  push:
-    branches: [ "master" ]
-  pull_request:
-    branches: [ "master" ]
+    push:
+        branches: ["master"]
+    pull_request:
+        branches: ["master"]
 
 jobs:
+    build:
+        runs-on: ubuntu-latest
 
-  build:
-
-    runs-on: ubuntu-latest
-
-    steps:
-    - uses: actions/checkout@v3
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag rajatverma311201/docker-react:$(date +%s)
+        steps:
+            - uses: actions/checkout@v3
+            - name: Build the Docker image
+            - run: docker build . --file Dockerfile --tag rajatverma311201/docker-react
+            - run: docker run rajatverma311201/docker-react npm run test -- --coverage
